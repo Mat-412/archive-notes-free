@@ -1,4 +1,4 @@
-# Archive Notes
+# Archive Notes (Free Edition)
 
 A powerful note-taking application with Markdown and LaTeX support, featuring real-time preview, hierarchical note organization, and built-in tools for mathematical notation.
 
