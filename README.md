@@ -18,16 +18,19 @@ A powerful note-taking application with Markdown and LaTeX support, featuring re
 
 **Download the latest Windows installer:**
 
-👉 **[Download Archive Notes v1.0.0](https://github.com/Mat-412/archive-notes/releases/tag/v1.0.0)**
+👉 **[Download Archive Notes (Free Edition)](https://github.com/Mat-412/archive-notes/releases/latest)**
 
-Or visit the [releases page](https://github.com/Mat-412/archive-notes/releases/tag/v1.0.0) to see all available downloads.
+Or visit the [releases page](https://github.com/Mat-412/archive-notes/releases) to see all available downloads.
 
 ## Installation
 
-1. Download `ArchiveNotes-Setup-1.0.0.exe` from [https://github.com/Mat-412/archive-notes/releases/tag/v1.0.0](https://github.com/Mat-412/archive-notes/releases/tag/v1.0.0)
-2. Run the installer
-3. Follow the installation wizard
-4. Launch Archive Notes from your desktop or Start menu
+1. Go to the latest release:
+   - https://github.com/Mat-412/archive-notes/releases/latest
+2. Download the Windows installer asset named like:
+   - `ArchiveNotes-free-Setup-<version>.exe`
+3. Run the installer
+4. Follow the installation wizard
+5. Launch Archive Notes from your desktop or Start menu
 
 ## Getting Started
 
@@ -153,9 +156,7 @@ Found a bug? Please report it using the [Issues tab](https://github.com/Mat-412/
 
 ## Version
 
-Current version: **1.0.0** (Free Edition)
-
-See [CHANGELOG.md](CHANGELOG.md) for version history.
+See the [latest release](https://github.com/Mat-412/archive-notes/releases/latest) and [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ---
 
