@@ -139,7 +139,7 @@ Press `F8` to open the custom table builder:
 
 ## License
 
-Free for personal, non-commercial use. See [LICENSE.txt](LICENSE.txt) for full terms.
+Free for personal, non-commercial use. See LICENSE.txt in the app for full terms.
 
 This software is proprietary and NOT open source. You may not copy, modify, distribute, or reverse engineer the software.
 
