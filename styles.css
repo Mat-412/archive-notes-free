@@ -237,15 +237,22 @@ header p {
 }
 
 .release-notes-toggle {
-    color: #b6b6b6;
+    color: #b6b6b6 !important;
     text-decoration: none;
     font-size: 0.9rem;
     cursor: pointer;
     transition: color 0.2s ease;
 }
 
+.release-notes-toggle:link,
+.release-notes-toggle:visited,
+.release-notes-toggle:active {
+    color: #b6b6b6 !important;
+    text-decoration: none;
+}
+
 .release-notes-toggle:hover {
-    color: white;
+    color: white !important;
     text-decoration: underline;
 }
 
@@ -442,3 +449,4 @@ footer a:hover {
         margin-bottom: 0.5rem;
     }
 }
+
