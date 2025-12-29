@@ -193,22 +193,55 @@
                             <div>Download</div>
                         </div>
                         <div class="version-row">
-                            <div class="version-number">v1.0.2</div>
-                            <div class="version-notes">Bug fixes and improvements</div>
+                            <div class="version-number">v1.0.2<br><span style="font-size: 0.85em; opacity: 0.8;">2025-12-28</span></div>
+                            <div class="version-notes">
+                                <a href="#" class="release-notes-toggle" data-target="notes-1.0.2">See Release Notes</a>
+                                <div class="release-notes-content" id="notes-1.0.2" style="display: none; font-size: 0.8rem; line-height: 1.4; margin-top: 0.5rem;">
+                                    <ul>
+                                        <li>Quickly created notes are now properly saved when closing the app</li>
+                                        <li>When deleting the parent of a note it now leaves the note completely, showing the "note not selected" screen</li>
+                                        <li>When recovering the parent of a note it now stays on that note when it leaves the trash can</li>
+                                        <li>When recovering a note it now keeps the same open/closed state it had in the trash can</li>
+                                        <li>Window icon in the top-left corner is now crisp and clear at all display scaling levels</li>
+                                        <li>Plus button in the sidebar is now larger and better centered</li>
+                                        <li>Imported notes now appear at the top of the sidebar in their original order from the imported file</li>
+                                        <li>Sidebar can now be resized slightly wider (increased max width by 5px)</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="version-download">
                                 <a href="https://github.com/Mat-412/archive-notes-free/releases/download/v1.0.2/ArchiveNotes-free-Setup-1.0.2.exe" class="version-download-btn" download="ArchiveNotes-free-Setup-1.0.2.exe">Download</a>
                             </div>
                         </div>
                         <div class="version-row">
-                            <div class="version-number">v1.0.1</div>
-                            <div class="version-notes">Bug fixes and improvements</div>
+                            <div class="version-number">v1.0.1<br><span style="font-size: 0.85em; opacity: 0.8;">2025-12-20</span></div>
+                            <div class="version-notes">
+                                <a href="#" class="release-notes-toggle" data-target="notes-1.0.1">See Release Notes</a>
+                                <div class="release-notes-content" id="notes-1.0.1" style="display: none; font-size: 0.8rem; line-height: 1.4; margin-top: 0.5rem;">
+                                    <ul>
+                                        <li>Added an in-app "What's New" screen (Help → What's New) and it auto-opens once after updating.</li>
+                                        <li>Added in-app update notifications (checks on launch; prompts to download/install when an update is available).</li>
+                                        <li>About dialog header now shows "(Free Edition)".</li>
+                                        <li>Updated the About dialog description text.</li>
+                                        <li>Windows installer artifact name now includes <code style="background: rgba(255,255,255,0.1); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em;">-free-</code> (<code style="background: rgba(255,255,255,0.1); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em;">ArchiveNotes-free-Setup-1.0.1.exe</code>).</li>
+                                        <li>Dependency updates: <code style="background: rgba(255,255,255,0.1); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em;">electron</code> → 39.2.7, <code style="background: rgba(255,255,255,0.1); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em;">dompurify</code> → 3.3.1.</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="version-download">
                                 <a href="https://github.com/Mat-412/archive-notes-free/releases/download/v1.0.1/ArchiveNotes-free-Setup-1.0.1.exe" class="version-download-btn" download="ArchiveNotes-free-Setup-1.0.1.exe">Download</a>
                             </div>
                         </div>
                         <div class="version-row">
-                            <div class="version-number">v1.0.0</div>
-                            <div class="version-notes">Initial public release</div>
+                            <div class="version-number">v1.0.0<br><span style="font-size: 0.85em; opacity: 0.8;">2025-12-12</span></div>
+                            <div class="version-notes">
+                                <a href="#" class="release-notes-toggle" data-target="notes-1.0.0">See Release Notes</a>
+                                <div class="release-notes-content" id="notes-1.0.0" style="display: none; font-size: 0.8rem; line-height: 1.4; margin-top: 0.5rem;">
+                                    <ul>
+                                        <li>Initial public release (Free Edition: personal, non-commercial use).</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="version-download">
                                 <a href="https://github.com/Mat-412/archive-notes-free/releases/download/v1.0.0/ArchiveNotes-Setup-1.0.0.exe" class="version-download-btn" download="ArchiveNotes-Setup-1.0.0.exe">Download</a>
                             </div>
@@ -396,6 +429,31 @@
                         getTaggedExeUrl(owner, repo, tag)
                             .then(url => { window.location.href = url; })
                             .catch(_ => { window.location.href = fallbackUrl; });
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <script>
+        // Release notes toggle functionality
+        (function () {
+            const toggles = document.querySelectorAll(".release-notes-toggle");
+            
+            toggles.forEach(toggle => {
+                toggle.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const targetId = toggle.getAttribute("data-target");
+                    const content = document.getElementById(targetId);
+                    
+                    if (content) {
+                        if (content.style.display === "none") {
+                            content.style.display = "block";
+                            toggle.textContent = "Hide Release Notes";
+                        } else {
+                            content.style.display = "none";
+                            toggle.textContent = "See Release Notes";
+                        }
                     }
                 });
             });
