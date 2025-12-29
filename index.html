@@ -89,7 +89,7 @@
             <h1>Archive Notes</h1>
             <p style="margin-top: 1rem; font-size: 1.1rem; opacity: 0.9;">Offline desktop note-taking app with Markdown and LaTeX support.<br>Includes hierarchical organization, a built-in symbol insertion tool, a built-in table builder, and much more.</p>
             <div class="download-buttons" style="margin-top: 2rem;">
-                <a href="https://github.com/Mat-412/archive-notes-free/releases/latest" class="download-btn latest-free-download" data-repo-owner="Mat-412" data-repo-name="archive-notes-free">Download Latest Free Version</a>
+                <a href="https://github.com/Mat-412/archive-notes-free/releases/download/v1.0.2/ArchiveNotes-free-Setup-1.0.2.exe" class="download-btn" download="ArchiveNotes-free-Setup-1.0.2.exe">Download Latest Free Version</a>
                 <a href="#" class="download-btn paid coming-soon" target="_blank" rel="noopener noreferrer">Download Latest Paid Version</a>
             </div>
         </div>
@@ -170,7 +170,7 @@
             <h2>Ready to get started?</h2>
             <p>Download the latest version of Archive Notes. Free for personal, non-commercial use.</p>
             <div class="download-buttons">
-                <a href="https://github.com/Mat-412/archive-notes-free/releases/latest" class="download-btn latest-free-download" data-repo-owner="Mat-412" data-repo-name="archive-notes-free">Download Latest Free Version</a>
+                <a href="https://github.com/Mat-412/archive-notes-free/releases/download/v1.0.2/ArchiveNotes-free-Setup-1.0.2.exe" class="download-btn" download="ArchiveNotes-free-Setup-1.0.2.exe">Download Latest Free Version</a>
                 <a href="#" class="download-btn paid coming-soon" target="_blank" rel="noopener noreferrer">Download Latest Paid Version</a>
             </div>
             <p style="margin-top: 2rem; font-size: 1rem; opacity: 0.8;">Paid version coming soon</p>
@@ -193,10 +193,17 @@
                             <div>Download</div>
                         </div>
                         <div class="version-row">
+                            <div class="version-number">v1.0.2</div>
+                            <div class="version-notes">Bug fixes and improvements</div>
+                            <div class="version-download">
+                                <a href="https://github.com/Mat-412/archive-notes-free/releases/download/v1.0.2/ArchiveNotes-free-Setup-1.0.2.exe" class="version-download-btn" download="ArchiveNotes-free-Setup-1.0.2.exe">Download</a>
+                            </div>
+                        </div>
+                        <div class="version-row">
                             <div class="version-number">v1.0.1</div>
                             <div class="version-notes">Bug fixes and improvements</div>
                             <div class="version-download">
-                                <a href="https://github.com/Mat-412/archive-notes-free/releases/tag/v1.0.1" class="version-download-btn version-tag-download" data-repo-owner="Mat-412" data-repo-name="archive-notes-free" data-release-tag="v1.0.1">Download</a>
+                                <a href="https://github.com/Mat-412/archive-notes-free/releases/download/v1.0.1/ArchiveNotes-free-Setup-1.0.1.exe" class="version-download-btn" download="ArchiveNotes-free-Setup-1.0.1.exe">Download</a>
                             </div>
                         </div>
                         <div class="version-row">
@@ -317,7 +324,7 @@
 
     <script>
         // Version table "Download" buttons that should download the installer for a specific tag.
-        // Falls back to the release page if the API call fails.
+        // Pre-fetches download URLs on page load for instant downloads.
         (function () {
             const tagButtons = document.querySelectorAll(".version-tag-download");
             if (!tagButtons.length) return;
@@ -350,8 +357,26 @@
                 throw new Error("No .exe assets found on tagged release");
             }
 
+            // Pre-fetch all download URLs on page load
+            tagButtons.forEach(async btn => {
+                const owner = btn.getAttribute("data-repo-owner") || "Mat-412";
+                const repo = btn.getAttribute("data-repo-name") || "archive-notes-free";
+                const tag = btn.getAttribute("data-release-tag");
+                
+                if (tag) {
+                    try {
+                        const url = await getTaggedExeUrl(owner, repo, tag);
+                        // Store the URL in a data attribute for instant access
+                        btn.setAttribute("data-download-url", url);
+                    } catch (_) {
+                        // Keep the fallback URL if API call fails
+                    }
+                }
+            });
+
+            // Set up click handlers that use pre-fetched URLs
             tagButtons.forEach(btn => {
-                btn.addEventListener("click", async (e) => {
+                btn.addEventListener("click", (e) => {
                     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
                     e.preventDefault();
 
@@ -360,16 +385,17 @@
                     const tag = btn.getAttribute("data-release-tag");
                     const fallbackUrl = btn.getAttribute("href") || `https://github.com/${owner}/${repo}/releases`;
 
-                    if (!tag) {
+                    // Use pre-fetched URL if available, otherwise fall back
+                    const preFetchedUrl = btn.getAttribute("data-download-url");
+                    if (preFetchedUrl) {
+                        window.location.href = preFetchedUrl;
+                    } else if (!tag) {
                         window.location.href = fallbackUrl;
-                        return;
-                    }
-
-                    try {
-                        const url = await getTaggedExeUrl(owner, repo, tag);
-                        window.location.href = url;
-                    } catch (_) {
-                        window.location.href = fallbackUrl;
+                    } else {
+                        // If not pre-fetched yet, fetch now (shouldn't happen often)
+                        getTaggedExeUrl(owner, repo, tag)
+                            .then(url => { window.location.href = url; })
+                            .catch(_ => { window.location.href = fallbackUrl; });
                     }
                 });
             });
